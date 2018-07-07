@@ -1,0 +1,14 @@
+.comboBox .list-cell 
+{
+    -fx-background-color: #999999;
+    -fx-text-fill: #000000;
+    -fx-font-weight: Bold;
+}
+.comboBox .list-cell:hover
+{
+    -fx-background-color: #5181e1;
+}
+.comboBox .list-cell:active
+{
+    -fx-background-color: #5181e1;
+}

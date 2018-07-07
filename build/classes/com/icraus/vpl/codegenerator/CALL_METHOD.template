@@ -1,0 +1,10 @@
+%%NAME_START%% Call Method %%NAME_END%%
+%%PROPERTIES_START%%
+%%method name%%: method
+%%parameters%%[]:i
+%%PROPERTIES_END%%
+%%STATEMENT_START%%
+%%method name%%(%%parameters%%[])$$END_LINE_OP
+%%STATEMENT_END%%
+
+%%COMPONENT_TYPE_START%%CALL_METHOD%%COMPONENT_TYPE_END%%

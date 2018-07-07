@@ -1,0 +1,9 @@
+%%NAME_START%% Declare variable %%NAME_END%%
+%%PROPERTIES_START%%
+%%variable type%%:int
+%%variable name%%:name
+%%variable value%%:0
+%%PROPERTIES_END%%
+%%STATEMENT_START%%
+%%variable type%% %%variable name%% = %%variable value%%$$END_LINE_OP
+%%STATEMENT_END%%

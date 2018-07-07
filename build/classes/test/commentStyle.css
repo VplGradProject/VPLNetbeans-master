@@ -1,0 +1,7 @@
+.comment{
+    -fx-background-color:#112233 ;
+    -fx-font: 20px System;
+    -fx-font-weight: Bold;
+    -fx-shape: "M0 0 L100 0 L100 50 L0 50 Z";
+    -fx-border-style: dashed;
+}

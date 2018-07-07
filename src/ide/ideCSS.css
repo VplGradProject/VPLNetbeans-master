@@ -1,0 +1,138 @@
+/*MenuBar*/
+.menuBar .label{
+    -fx-text-fill: #ffffff;
+    -fx-font: 15px System ;
+}
+.menuBar .context-menu{
+    -fx-background-color: #666666;
+}
+
+/*ToolBar*/
+.toolBar .button{
+    -fx-background-color: #333333;  
+    -fx-border-color: transparent;
+    -fx-border-width: 3;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 10%;
+    -fx-background-size: 15px;
+    -fx-font-weight: Bold;
+}
+.toolBar .loadTreeButton{        
+    -fx-background-image: url('loadTree.png');
+}
+.toolBar .loadTreeButton:hover{  
+    -fx-border-color: transparent transparent #ffff00 transparent;
+}
+.toolBar .createLinkButton{        
+    -fx-background-image: url('createLink.png');
+}
+.toolBar .createLinkButton:hover{
+    -fx-border-color: transparent transparent #5181e1 transparent;
+}
+.toolBar .removeButton{        
+    -fx-background-image: url('remove.png');
+}
+.toolBar .removeButton:hover{  
+    -fx-border-color: transparent transparent #ff0000 transparent;
+}
+.toolBar .runButton{        
+    -fx-background-image: url('run.png');
+}
+.toolBar .runButton:hover{ 
+    -fx-border-color: transparent transparent #00ff00 transparent;
+}
+.toolBar .saveButton{        
+    -fx-background-image: url('save.png');
+}
+.toolBar .saveButton:hover{ 
+    -fx-border-color: transparent transparent #ff9900 transparent;
+}
+.toolBar .upButton{        
+    -fx-background-image: url('up.png');
+}
+.toolBar .upButton:hover{ 
+    -fx-border-color: transparent transparent #00ff00 transparent;
+}
+.toolBar .downButton{        
+    -fx-background-image: url('down.png');
+}
+.toolBar .downButton:hover{ 
+    -fx-border-color: transparent transparent #ff0000 transparent;
+}
+
+/*Library*/
+.library .title{
+    -fx-background-color: #333333; 
+}
+.library .titled-pane:expanded > .title{
+    -fx-background-color: #5181e1;
+}
+.library .titled-pane{
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: Bold;
+}
+.library .titled-pane > *.content{
+    -fx-background-color: #666666;
+    -fx-box-border: transparent;
+}
+
+/*Workspace*/
+.mainTabs .tab-label{
+    -fx-text-fill: #ffffff;
+}
+.mainTabs .tab{
+    -fx-background-color: #333333;
+    -fx-border-color: #000000 #000000 transparent #000000;
+    -fx-background-insets: 0 1 0 1,0,0;
+}
+.mainTabs .tab:selected{
+    -fx-background-color: #666666;
+}
+.mainTabs .tab:selected .tab-label{
+    -fx-text-fill: #99ffcc;
+}
+.mainTabs .tab-header-background {
+    -fx-background-color: #999999;
+}
+.mainTabs .tab-pane{
+    -fx-background-color: #999999;
+}
+.mainTabs .scroll-pane{
+    -fx-background: #666666;    
+}
+.mainTabs .scroll-pane .class:focused{
+    -fx-border-color: #333333;
+    -fx-border-width: 5;
+    -fx-border-style: dashed;
+}
+.mainTabs .scroll-pane .button:focused{
+    -fx-border-color: #333333;
+    -fx-border-width: 3;
+    -fx-border-style: dashed;
+}
+
+/*Project Tree*/
+.projectTree .tree-view{
+    -fx-background-color: #666666;
+}
+.projectTree .tree-cell{
+    -fx-background-color: #999999;
+}
+.projectTree .tree-cell:selected{
+    -fx-background-color: #5181e1;
+}
+
+/*
+Colors used:
+
+Blue: #5181e1
+Red: #ff0000
+Cyan: #99ffcc
+Light Grey: #999999
+Medium Grey: #666666
+Dark Grey: #333333
+*/
+
+
+ 
+

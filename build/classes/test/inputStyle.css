@@ -1,0 +1,6 @@
+.inputValue{
+    -fx-background-color:#6666ff ;
+    -fx-font: 20px System;
+    -fx-font-weight: Bold;
+    -fx-shape: "M20 0 L100 0 L80 50 L0 50 Z";
+}

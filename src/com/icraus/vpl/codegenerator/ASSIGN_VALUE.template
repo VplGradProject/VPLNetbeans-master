@@ -1,0 +1,8 @@
+%%NAME_START%% Assign Value%%NAME_END%%
+%%PROPERTIES_START%%
+%%variable name%%:name:__VAR__TYPE__%%DECLARE_FIELD%%[%%variable name%%]
+%%variable value%%:0:__ANY__:__ANY__
+%%PROPERTIES_END%%
+%%STATEMENT_START%%
+%%variable name%% = %%variable value%%$$END_LINE_OP
+%%STATEMENT_END%%

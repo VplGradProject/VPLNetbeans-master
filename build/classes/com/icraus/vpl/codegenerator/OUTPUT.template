@@ -1,0 +1,8 @@
+%%NAME_START%% Output %%NAME_END%%
+%%PROPERTIES_START%%
+%%value%%:i:__ANY__:__ANY__
+%%PROPERTIES_END%%
+%%STATEMENT_START%%
+System.out.println(%%value%%)$$END_LINE_OP
+$$BLOCK_END_OP
+%%STATEMENT_END%%

@@ -1,0 +1,17 @@
+%%NAME_START%% Class %%NAME_END%%
+%%PROPERTIES_START%%
+%%class name%%: ClassName
+%%class type%%:class:__CHOICE__%%__NULL__%%[class%{$$CLASS_STAT}%, interface%{interface}%]
+%%access type%%:public:__CHOICE__%%__NULL__%%[public, private, protected]
+%%extends%%:Object:__VAR__TYPE__%%CLASS_TYPE%%[%%class name%%]:D%<{$$EXTENDS_WRD}<%
+%%imports%%:java.io.Serializable
+%%interfaces%%[]:Serializable:__ANY__:D%<{$$IMPLEMENTS_WRD}<%
+%%packageName%%:main
+%%PROPERTIES_END%%
+%%STATEMENT_START%%
+$$PACKAGE_WRD %%packageName%%$$END_LINE_OP
+$$IMPORT_STAT %%imports%%$$END_LINE_OP 
+%%access type%% %%class type%% %%class name%% %%extends%% %%interfaces%%[] $$BLOCK_START_OP
+%%CHILDREN_TOKEN%%
+$$BLOCK_END_OP
+%%STATEMENT_END%%

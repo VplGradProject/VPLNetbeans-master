@@ -1,0 +1,11 @@
+%%NAME_START%% For Statement %%NAME_END%%
+%%PROPERTIES_START%%
+%%condtion%%: i <= 10
+%%start%%:int i = 0
+%%end%%:++i
+%%PROPERTIES_END%%
+%%STATEMENT_START%%
+$$FOR_STAT $$PARAN_START_OP %%start%%$$END_LINE_OP %%condtion%% $$END_LINE_OP %%end%%$$PARAN_END_OP $$BLOCK_START_OP
+%%CHILDREN_TOKEN%%
+$$BLOCK_END_OP
+%%STATEMENT_END%%

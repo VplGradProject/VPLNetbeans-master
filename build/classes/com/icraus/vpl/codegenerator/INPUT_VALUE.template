@@ -1,0 +1,7 @@
+%%NAME_START%% Input %%NAME_END%%
+%%PROPERTIES_START%%
+%%variable name%%: i
+%%PROPERTIES_END%%
+%%STATEMENT_START%%
+String %%variable name%% = new Scanner(System.in).next()$$END_LINE_OP
+%%STATEMENT_END%%

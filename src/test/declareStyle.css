@@ -1,0 +1,6 @@
+.declareVariable{
+    -fx-background-color:#66ff66 ;
+    -fx-font: 20px System;
+    -fx-font-weight: Bold;
+    -fx-shape: "M0 0 L10 0 L10 10 L11 10 L11 0 L100 0 L100 10 L10 10 L10 11 L100 11 L100 50 L11 50 L11 11 L10 11 L10 50 L0 50 L0 11 L11 11 L11 10 L0 10 Z";
+}

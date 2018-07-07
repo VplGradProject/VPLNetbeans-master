@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root prefHeight="327.0" prefWidth="202.0" stylesheets="@classStyle.css" type="VBox" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox fx:id="headVBox" alignment="CENTER" prefHeight="115.0" prefWidth="202.0" spacing="20.0" style="-fx-background-color: #2d6c18;">
+         <children>
+            <Label fx:id="packageNameLabel" alignment="CENTER" style="-fx-text-fill: #112233;" text="packageName">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="classNameLabel" alignment="CENTER" contentDisplay="CENTER" style="-fx-text-fill: #ffffff;" text="Class Name" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font></Label>
+         </children></VBox>
+      <Label fx:id="classAttributesLabel1" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="27.0" prefWidth="225.0" style="-fx-text-fill: #ffff00; -fx-background-color: #3e9222;" text="Attributes" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <padding>
+            <Insets left="5.0" />
+         </padding>
+      </Label>
+        <VBox fx:id="fieldsVBox" prefHeight="200.0" prefWidth="178.0" spacing="5.0" style="-fx-background-color: #3e9222;">
+         <padding>
+            <Insets left="5.0" top="5.0" />
+         </padding>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin></VBox>
+      <Label fx:id="classMethodsLabel1" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="27.0" prefWidth="265.0" style="-fx-text-fill: #333333; -fx-background-color: #60d13a;" text="Methods" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <padding>
+            <Insets left="5.0" />
+         </padding>
+      </Label>
+        <VBox fx:id="methodsVBox" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #60d13a;" styleClass="methods">
+         <padding>
+            <Insets left="5.0" top="5.0" />
+         </padding>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin></VBox>
+    </children>
+</fx:root>

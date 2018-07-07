@@ -1,0 +1,13 @@
+%%NAME_START%% Method %%NAME_END%%
+%%PROPERTIES_START%%
+%%Method Name%%:methodName
+%%return type%%:void
+%%parameters%%[]:int i, String s
+%%access type%%:public:__CHOICE__%%__NULL__%%[public, private, protected]
+%%Exception%%:throws NullPointerException
+%%PROPERTIES_END%%
+%%STATEMENT_START%%
+%%access type%% %%return type%% %%Method Name%% $$PARAN_START_OP %%parameters%%[] $$PARAN_END_OP %%Exception%% $$BLOCK_START_OP
+%%CHILDREN_TOKEN%%
+$$BLOCK_END_OP
+%%STATEMENT_END%%

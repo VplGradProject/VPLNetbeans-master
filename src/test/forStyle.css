@@ -1,0 +1,6 @@
+.forLoop{
+    -fx-background-color:#00cc00 ;
+    -fx-font: 20px System;
+    -fx-font-weight: Bold;
+    -fx-shape: "M25 0 L75 0 L100 25 L75 50 L25 50 L0 25 Z";
+}

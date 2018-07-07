@@ -1,0 +1,9 @@
+%%NAME_START%% Comment %%NAME_END%%
+%%PROPERTIES_START%%
+%%comment%%: TEXT HERE:__VAR__TYPE__%%DECLARE_FIELD%%[%%variable name%%]
+%%PROPERTIES_END%%
+%%STATEMENT_START%%
+$$COMMENT_START
+%%comment%%
+$$COMMENT_END
+%%STATEMENT_END%%

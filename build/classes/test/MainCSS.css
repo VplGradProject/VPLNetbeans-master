@@ -1,0 +1,65 @@
+.forLoopStyle{
+    -fx-background-color:#00cc00 ;
+    -fx-font: 20px System;
+    -fx-font-weight: Bold;
+    -fx-shape: "M25 0 L75 0 L100 25 L75 50 L25 50 L0 25 Z";
+}
+.ifStatementStyle{
+    -fx-background-color: #ff0000;
+    -fx-font: 20px System;
+    -fx-font-weight: Bold;
+    -fx-shape: "M0 50 L50 0 L100 50 L50 100 Z";
+}
+.whileLoopStyle{
+    -fx-background-color:#00cccc ;
+    -fx-font: 20px System;
+    -fx-font-weight: Bold;
+    -fx-shape: "M25 0 L75 0 L100 25 L75 50 L25 50 L0 25 Z";
+}
+.doLoopStyle{
+    -fx-background-color:#ff9900 ;
+    -fx-font: 20px System;
+    -fx-font-weight: Bold;
+    -fx-shape: "M25 0 L75 0 L100 25 L75 50 L25 50 L0 25 Z";
+}
+.declareVariableStyle{
+    -fx-background-color:#66ff66 ;
+    -fx-font: 20px System;
+    -fx-font-weight: Bold;
+    -fx-shape: "M0 0 L10 0 L10 10 L11 10 L11 0 L100 0 L100 10 L10 10 L10 11 L100 11 L100 50 L11 50 L11 11 L10 11 L10 50 L0 50 L0 11 L11 11 L11 10 L0 10 Z";
+}
+.assignValueStyle{
+    -fx-background-color:#ffff99 ;
+    -fx-font: 20px System;
+    -fx-font-weight: Bold;
+    -fx-shape: "M0 0 L100 0 L100 50 L0 50 Z";
+}
+.inputValueStyle{
+    -fx-background-color:#6666ff ;
+    -fx-font: 20px System;
+    -fx-font-weight: Bold;
+    -fx-shape: "M20 0 L100 0 L80 50 L0 50 Z";
+}
+.outputExpressionStyle{
+    -fx-background-color:#99ffcc ;
+    -fx-font: 20px System;
+    -fx-font-weight: Bold;
+    -fx-shape: "M20 0 L100 0 L80 50 L0 50 Z";
+}
+.callMethodStyle{
+    -fx-background-color:#ff9999 ;
+    -fx-font: 20px System;
+    -fx-font-weight: Bold;
+    -fx-shape: "M0 0 L10 0 L10 50 L11 50 L11 0 L90 0 L90 50 L91 50 L91 0 L100 0 L100 50 L0 50 Z";
+}
+.commentStyle{
+    -fx-background-color:#ffffff ;
+    -fx-font: 20px System;
+    -fx-font-weight: Bold;
+    -fx-shape: "M0 0 L100 0 L100 50 L0 50 Z";
+    -fx-border-style: dashed;
+}
+#toolBox{
+    -fx-background-color: #666666;
+}
+

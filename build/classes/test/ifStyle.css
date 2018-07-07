@@ -1,0 +1,6 @@
+.ifStatement{
+    -fx-background-color: #ff0000;
+    -fx-font: 20px System;
+    -fx-font-weight: Bold;
+    -fx-shape: "M0 50 L50 0 L100 50 L50 100 Z";
+}

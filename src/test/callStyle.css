@@ -1,0 +1,7 @@
+.callMethod{
+    -fx-background-color:#ff9999 ;
+    -fx-font: 20px System;
+    -fx-font-weight: Bold;
+    -fx-shape: "M0 0 L10 0 L10 50 L11 50 L11 0 L90 0 L90 50 L91 50 L91 0 L100 0 L100 50 L0 50 Z";
+}
+
