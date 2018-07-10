@@ -16,6 +16,24 @@ public class UiProperties {
 
     private double width = 0.0;
     private double height = 0.0;
+    private double x = 0;
+    private double y = 0;
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
     private String css = "";
     private String cssId = "";
 
@@ -25,6 +43,13 @@ public class UiProperties {
     }
 
     public UiProperties() {
+
+    }
+    public UiProperties(UiProperties props) {
+        this.css = props.css;
+        this.cssId = props.cssId;
+        this.height = props.height;
+        this.width = props.width;
 
     }
 

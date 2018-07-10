@@ -80,7 +80,7 @@ public class PropertyWidget extends GridPane {
     private Result addChoiseHelper(String type, String name) {
         Result r = new Result();
         ChoiceBox<Formatter> box = new ChoiceBox<>();
-        box.getItems().addAll(parseChoiceOutputs(type));
+        box.getItems().addAll(parseChoiceOutputs(type, name));
         r.node = box;
         r.property = new SimpleStringProperty();
         box.getSelectionModel().selectedItemProperty().addListener(e -> {
@@ -123,6 +123,7 @@ public class PropertyWidget extends GridPane {
 }
 
 class Result {
+
     Node node;
     StringProperty property;
 }

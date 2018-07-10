@@ -35,7 +35,7 @@ public class Item extends Button implements DraggableComponent, Selectable {
 
     public Item(SimpleComponent _parent) {
         initalize(_parent);
-        
+
         setUiParameters(_parent.getUiProperties());
         _parent.uiPropertiesProperty().addListener(e -> {
             setUiParameters(_parent.getUiProperties());
@@ -56,6 +56,13 @@ public class Item extends Button implements DraggableComponent, Selectable {
                 ex.printStackTrace();
             }
         });
+        layoutXProperty().addListener(e -> {
+            parentComp.getUiProperties().setX(getLayoutX());
+        });
+        layoutYProperty().addListener(e -> {
+            parentComp.getUiProperties().setY(getLayoutY());
+        });
+
     }
 
     @Override
@@ -68,17 +75,20 @@ public class Item extends Button implements DraggableComponent, Selectable {
         this.parentComp = (SimpleComponent) parent;
     }
 
-    public void setParameters(double width, double height, String css, String cssId) {
+    public void setParameters(double x, double y, double width, double height, String css, String cssId) {
         setMinWidth(width);
         setMinHeight(height);
         String sheet = getClass().getResource(css).toExternalForm();
         getStylesheets().add(sheet);
         getStyleClass().add(cssId);
 
+        setLayoutX(x);
+        setLayoutY(y);
+
     }
 
     private void setUiParameters(UiProperties uiProperties) {
-        setText(getParentComponent().getComponentString());
-        setParameters(uiProperties.getWidth(), uiProperties.getHeight(), uiProperties.getCss(), uiProperties.getCssId());
+        setText(getParentComponent().getStatement().getName());
+        setParameters(uiProperties.getX(), uiProperties.getY(), uiProperties.getWidth(), uiProperties.getHeight(), uiProperties.getCss(), uiProperties.getCssId());
     }
 }

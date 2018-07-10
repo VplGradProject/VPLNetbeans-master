@@ -14,6 +14,7 @@ import com.sun.javafx.collections.ObservableListWrapper;
 import icraus.Components.ClassComponent;
 import icraus.Components.ComponentPlugin;
 import icraus.Components.ComponentPluginFactories;
+import icraus.Components.MainClassComponent;
 import icraus.Components.SimpleComponentPlugin;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -33,11 +34,11 @@ import javafx.collections.ObservableList;
  *
  * @author Shoka
  */
-public class ComponentsManager  {
+public class ComponentsManager {
 
     public static final String COMPONENT_MANAGER_PROPERTIES = "./component_manager.properties";
     public static final String PLUGIN_PATH_PROPERTY = "pluginsPath";
-    
+
     private static ComponentsManager instance = new ComponentsManager();
     private ObservableList<ComponentPlugin> pluginList = new ObservableListWrapper<>(new ArrayList<>());
 
@@ -79,8 +80,9 @@ public class ComponentsManager  {
         loadProperties();
         loadDefaultComponents();
         String str = managerProperties.getProperty(PLUGIN_PATH_PROPERTY);
-        if (str != null)
-        loadPluginsDir(str);
+        if (str != null) {
+            loadPluginsDir(str);
+        }
 
     }
 
@@ -99,7 +101,8 @@ public class ComponentsManager  {
         addComponent(ComponentPluginFactories.createWhileComponentPlugin("While", "inner blocks"));
         addComponent(ComponentPluginFactories.createDeclareVarPlugin("Declare Var", "Others"));
         addComponent(ComponentPluginFactories.createAssignVarPlugin("Assign Value", "Others"));
-        
+        plugin = new SimpleComponentPlugin("MainClass", "Containers", new MainClassComponent(), null);
+        addComponent(plugin);
     }
 
     public void addComponent(ComponentPlugin plugin) {

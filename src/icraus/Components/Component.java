@@ -9,7 +9,6 @@ import com.icraus.vpl.codegenerator.SimplePropertyStatement;
 import com.icraus.vpl.codegenerator.Statement;
 import com.sun.javafx.collections.ObservableListWrapper;
 import com.sun.javafx.collections.ObservableMapWrapper;
-import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
@@ -20,6 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.Observable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -28,11 +29,8 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.scene.Node;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -43,7 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Shoka
  */
 @XmlRootElement
-public abstract class Component /*implements Externalizable*/ {
+public abstract class Component implements Cloneable {
 
     private static final long serialVersionUID = 1L;
 //TODO set getters and remove setters of props to properties
@@ -58,7 +56,21 @@ public abstract class Component /*implements Externalizable*/ {
     private ObjectProperty<Component> parent;
     private String type = "";
     private int flags = ComponentFlags.INSERTABLE_FLAG | ComponentFlags.SELECTABLE_FLAG | ComponentFlags.REMOVABLE_FLAG;
-    private ObservableMap<String, String> propertyMap = new ObservableMapWrapper<>(new HashMap<>());
+    private ObservableMap<String, String> propertyMap;
+
+    private ObjectProperty<UiProperties> uiProperties;
+
+    public ObjectProperty<UiProperties> uiPropertiesProperty() {
+        return uiProperties;
+    }
+
+    public UiProperties getUiProperties() {
+        return uiProperties.get();
+    }
+
+    public void setUiProperties(UiProperties properties) {
+        this.uiProperties.set(properties);
+    }
 
     public ObservableList<Component> childernProperty() {
         return childern;
@@ -76,6 +88,8 @@ public abstract class Component /*implements Externalizable*/ {
     }
 
     public Component() {
+        this.uiProperties = new SimpleObjectProperty<>(new UiProperties());
+        this.propertyMap = new ObservableMapWrapper<>(new HashMap<>());
         statement = new SimpleObjectProperty<>(new SimplePropertyStatement());
         uiDelegate = new SimpleObjectProperty<>();
         uuid = new SimpleStringProperty();
@@ -144,9 +158,16 @@ public abstract class Component /*implements Externalizable*/ {
     }
 
     public String addComponent(int index, Component c) throws IllegalComponent {
+        List<String> allowedChildren = getStatement().getAllowedChildren();
+        if (!allowedChildren.isEmpty()) {
+            if (allowedChildren.contains(SimplePropertyStatement.__NONE__VAR) || (!allowedChildren.contains(c.getType()))) {
+                throw new IllegalComponent();
+            }
+        }
         childernProperty().add(index, c);
         c.setParent(this);
         return c.getUUID();
+
     }
 
     public void removeComponent(String uuid) throws ComponentNotFoundException {
@@ -169,7 +190,7 @@ public abstract class Component /*implements Externalizable*/ {
         }
 
         Component tmp = (Component) obj;
-        if (this.getUUID() != tmp.getUUID()) {
+        if (!this.getUUID().equals(tmp.getUUID())) {
             return false;
         }
         return true;
@@ -196,28 +217,27 @@ public abstract class Component /*implements Externalizable*/ {
         this.parent.setValue(_parent);
     }
 
-//    @Override
-    public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeObject(getUUID());
-        out.writeObject(getType());
-        out.writeInt(getFlags());
-        out.writeObject(getParent());
-        out.writeObject(new ArrayList<Component>(childernProperty()));
-        out.writeObject(getStatement());
-
-    }
-
-//    @Override
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-        setUUID((String) in.readObject());
-        setType((String) in.readObject());
-        setFlags(in.readInt());
-        setParent((Component) in.readObject());
-        childernProperty().addAll((ArrayList<Component>) in.readObject());
-        setStatement((SimplePropertyStatement) in.readObject());
-
-    }
-
+////    @Override
+//    public void writeExternal(ObjectOutput out) throws IOException {
+//        out.writeObject(getUUID());
+//        out.writeObject(getType());
+//        out.writeInt(getFlags());
+//        out.writeObject(getParent());
+//        out.writeObject(new ArrayList<Component>(childernProperty()));
+//        out.writeObject(getStatement());
+//
+//    }
+//
+////    @Override
+//    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+//        setUUID((String) in.readObject());
+//        setType((String) in.readObject());
+//        setFlags(in.readInt());
+//        setParent((Component) in.readObject());
+//        childernProperty().addAll((ArrayList<Component>) in.readObject());
+//        setStatement((SimplePropertyStatement) in.readObject());
+//
+//    }
     public void moveUp() {
         moveHelper(-1);
     }
@@ -250,7 +270,7 @@ public abstract class Component /*implements Externalizable*/ {
     }
 
     private void createListenrs() {
-        propertyMap.addListener((Observable e)->{
+        propertyMapProperty().addListener((Observable e) -> {
             getStatement().setPropertyMap(propertyMap);
         });
         childernProperty().addListener((Observable e) -> {
@@ -264,6 +284,24 @@ public abstract class Component /*implements Externalizable*/ {
         for (Component c : childernProperty()) {
             _children.add(c.getStatement());
         }
+    }
+
+    @Override
+    public Component clone() throws CloneNotSupportedException {
+        try {
+
+            Component instance = getClass().newInstance();
+            instance.propertyMapProperty().putAll(this.getPropertyMap());
+            instance.setStatement(new SimplePropertyStatement(this.getStatement()));
+            instance.setUiProperties(new UiProperties(getUiProperties()));
+            return instance;
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Component.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Component.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        throw new CloneNotSupportedException();
     }
 
 }

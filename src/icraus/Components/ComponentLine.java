@@ -69,6 +69,9 @@ public class ComponentLine extends Line implements EventHandler<DragEvent> {
         boolean eventComplete = false;
         if (db.hasContent(CanvasInsertComponentEventHandler.NODE_COPY_FORMAT)) {
             Component c = CanvasInsertComponentEventHandler.copiedComponent;
+            c.getUiDelegate().setLayoutX(event.getX());
+            c.getUiDelegate().setLayoutY(event.getY());
+            
             try {
                 ComponentsModel.getInstance().insertComponentAfter(prevComponent, c);
             } catch (ComponentNotFoundException ex) {

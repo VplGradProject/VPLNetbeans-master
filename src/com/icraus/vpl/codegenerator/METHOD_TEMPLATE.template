@@ -2,12 +2,29 @@
 %%PROPERTIES_START%%
 %%Method Name%%:methodName
 %%return type%%:void
-%%parameters%%[]:int i, String s
+%%parameters type%%[]:int
+%%parameters%%[]:i
 %%access type%%:public:__CHOICE__%%__NULL__%%[public, private, protected]
-%%Exception%%:throws NullPointerException
+%%exception%%:NullPointerException:__ANY__:D%<{throws}<%
 %%PROPERTIES_END%%
 %%STATEMENT_START%%
-%%access type%% %%return type%% %%Method Name%% $$PARAN_START_OP %%parameters%%[] $$PARAN_END_OP %%Exception%% $$BLOCK_START_OP
+@CPP@
+%%access type%%: %%return type%% %%Method Name%% $$PARAN_START_OP%%parameters type%%[] %%parameters%%[] $$PARAN_END_OP %%exception%% $$BLOCK_START_OP
 %%CHILDREN_TOKEN%%
 $$BLOCK_END_OP
+@CPP@||LANG||@JAVA@
+%%access type%% %%return type%% %%Method Name%% $$PARAN_START_OP %%parameters%%[] $$PARAN_END_OP %%exception%% $$BLOCK_START_OP
+%%CHILDREN_TOKEN%%
+$$BLOCK_END_OP
+@JAVA@||LANG||
+@PYTHON@
+def %%Method Name%% $$PARAN_START_OPself, %%parameters%%[] $$PARAN_END_OP %%exception%% $$BLOCK_START_OP
+%%CHILDREN_TOKEN%%
+$$BLOCK_END_OP
+@PYTHON@
+$$BLOCK_END_OP
 %%STATEMENT_END%%
+
+%%COMPONENT_TYPE_START%%METHOD%%COMPONENT_TYPE_END%%
+
+

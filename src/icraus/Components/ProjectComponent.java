@@ -9,12 +9,14 @@ import com.sun.javafx.collections.ObservableListWrapper;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import javafx.beans.Observable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -23,7 +25,6 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Shoka
  */
-
 @XmlRootElement
 public class ProjectComponent extends Component implements Pageable {
 
@@ -43,18 +44,18 @@ public class ProjectComponent extends Component implements Pageable {
         tab.textProperty().bindBidirectional(projectName);
         projectMainTab = new SimpleObjectProperty<>(tab);
 //        this.model = new ObservableMapWrapper<>(new HashMap<>());
-   
+
     }
 
     public ProjectComponent() {
         this("");
     }
-        
+
     @Override
     public int getFlags() {
         return super.getFlags() | ComponentFlags.PAGEABLE_FLAG; //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public String toString() {
         return projectName.getValue();
@@ -64,8 +65,7 @@ public class ProjectComponent extends Component implements Pageable {
     public String getType() {
         return PROJECT_TPYE;
     }
-    
-    
+
     public Component getComponentByUuid(String uuid) throws ComponentNotFoundException {
         if (getUUID().equals(uuid)) {
             return this;
@@ -94,6 +94,7 @@ public class ProjectComponent extends Component implements Pageable {
 
     public String addClass(String className, String packageName) throws IllegalComponent {
         ClassComponent c = new ClassComponent(className, packageName);
+
         addComponent(c);
         return c.getUUID();
     }
@@ -135,7 +136,7 @@ public class ProjectComponent extends Component implements Pageable {
     public ClassComponent getClassByName(String name) throws ComponentNotFoundException {
         ObservableList<ClassComponent> lst = toList();
         for (ClassComponent c : lst) {
-            if (c.classNameProperty().getValue() == name) {
+            if (c.propertyMapProperty().get("%%class name%%").equals(name)) {
                 return c;
             }
         }
@@ -147,12 +148,11 @@ public class ProjectComponent extends Component implements Pageable {
 
     }
 
-
     public ObservableList<ClassComponent> toList() {
         ObservableList<Component> lst = childernProperty();
         ObservableList<ClassComponent> clst = FXCollections.observableArrayList();
-        for(Component c : lst){
-            clst.add((ClassComponent)c);
+        for (Component c : lst) {
+            clst.add((ClassComponent) c);
         }
         return clst;
     }
@@ -160,6 +160,10 @@ public class ProjectComponent extends Component implements Pageable {
     @Override
     public String addComponent(Component c) throws IllegalComponent {
         if (c.getType().equals(ClassComponent.CLASS_TYPE)) {
+            c.propertyMapProperty().addListener((Observable e) -> {
+                ProjectScrollAnchorPane content = (ProjectScrollAnchorPane) getTab().getContent();
+                content.redraw();
+            });
             return super.addComponent(c);
         } //To change body of generated methods, choose Tools | Templates.
         throw new IllegalComponent("Not a Class Type");
@@ -174,7 +178,7 @@ public class ProjectComponent extends Component implements Pageable {
     public StringProperty projectNameProperty() {
         return projectName;
     }
-    
+
     public String getProjectName() {
         return projectName.get();
     }
@@ -183,5 +187,4 @@ public class ProjectComponent extends Component implements Pageable {
         this.projectName.setValue(projectName);
     }
 
-    
 }

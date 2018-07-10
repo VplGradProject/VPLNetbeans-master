@@ -21,17 +21,25 @@ public class SimpleComponentTabbed extends SimpleComponent implements Pageable {
 
     private Tab tab;
 
+    private void createListener() {
+        childernProperty().addListener((Observable e) -> {
+            contentChanged();
+        });
+
+        componentStringProperty().addListener(e -> {
+            tab.setText(getComponentString());
+        });
+    }
+
     public SimpleComponentTabbed() {
         tab = new Tab("", new ScrollAnchorPane(this));
-        tab.textProperty().bind(componentStringProperty());
+        createListener();
     }
 
     public SimpleComponentTabbed(SimplePropertyStatement s, Node delegate, String _type) {
         super(s, delegate, _type);
         tab = new Tab(_type, new ScrollAnchorPane(this));
-        childernProperty().addListener((Observable e) -> {
-            contentChanged();
-        });
+        createListener();
 
     }
 
@@ -65,6 +73,7 @@ public class SimpleComponentTabbed extends SimpleComponent implements Pageable {
         });
 
     }
+//    private void create
 
     @Override
     public int getFlags() {

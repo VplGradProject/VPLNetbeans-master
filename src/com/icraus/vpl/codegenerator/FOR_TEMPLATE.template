@@ -1,11 +1,22 @@
 %%NAME_START%% For Statement %%NAME_END%%
 %%PROPERTIES_START%%
+%%var name%%:i
 %%condtion%%: i <= 10
-%%start%%:int i = 0
-%%end%%:++i
+%%end%%:10
+%%start%%:0
+%%increment%%:1
 %%PROPERTIES_END%%
+
 %%STATEMENT_START%%
-$$FOR_STAT $$PARAN_START_OP %%start%%$$END_LINE_OP %%condtion%% $$END_LINE_OP %%end%%$$PARAN_END_OP $$BLOCK_START_OP
+@JAVA, CPP@
+$$FOR_STAT $$PARAN_START_OP int %%var name%% = %%start%%$$END_LINE_OP %%condtion%% $$END_LINE_OP %%var name%% += %%increment%%$$PARAN_END_OP $$BLOCK_START_OP
 %%CHILDREN_TOKEN%%
 $$BLOCK_END_OP
+@JAVA, CPP@||LANG||@PYTHON@
+$$FOR_STAT %%var name%% in $$PARAN_START_OP%%start%%, %%end%%, %%increment%%$$PARAN_END_OP$$BLOCK_START_OP
+%%CHILDREN_TOKEN%%
+$$BLOCK_END_OP
+@PYTHON@
 %%STATEMENT_END%%
+
+%%COMPONENT_TYPE_START%%FOR_STATEMENT%%COMPONENT_TYPE_END%%

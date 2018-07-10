@@ -67,6 +67,12 @@ public class ClassContentPane extends VBox implements Selectable, DraggableCompo
         createMouseEvent();
         String css = getClass().getResource("styleclass.css").toExternalForm();
         getStylesheets().add(css);
+        layoutXProperty().addListener(e -> {
+            getParentComponent().getUiProperties().setX(getLayoutX());
+        });
+        layoutYProperty().addListener(e -> {
+            getParentComponent().getUiProperties().setY(getLayoutY());
+        });
 
     }
 
@@ -114,6 +120,10 @@ public class ClassContentPane extends VBox implements Selectable, DraggableCompo
         menu.getItems().add(addMethodItem);
         this.setOnContextMenuRequested(e -> {
             menu.show(this, Side.LEFT, e.getX(), e.getY());
+        });
+
+        getParentComponent().uiPropertiesProperty().addListener(e -> {
+            setUiParameters(getParentComponent().getUiProperties());
         });
     }
 
@@ -170,6 +180,22 @@ public class ClassContentPane extends VBox implements Selectable, DraggableCompo
 //            methodsVBox.getChildren().add(mc.getUiDelegate().getValue());
             fieldsVBox.getChildren().add(mc.getUiDelegate());
         }
+    }
+
+    public void setParameters(double x, double y, double width, double height, String css, String cssId) {
+        setMinWidth(width);
+        setMinHeight(height);
+        String sheet = getClass().getResource(css).toExternalForm();
+        getStylesheets().add(sheet);
+        getStyleClass().add(cssId);
+
+        setLayoutX(x);
+        setLayoutY(y);
+
+    }
+
+    private void setUiParameters(UiProperties uiProperties) {
+        setParameters(uiProperties.getX(), uiProperties.getY(), uiProperties.getWidth(), uiProperties.getHeight(), uiProperties.getCss(), uiProperties.getCssId());
     }
 
 }

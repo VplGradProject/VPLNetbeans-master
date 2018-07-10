@@ -6,5 +6,17 @@
 %%access type%%:public:__ACCESS__
 %%PROPERTIES_END%%
 %%STATEMENT_START%%
+@CPP@
+%%access type%%: %%variable type%% %%variable name%% = %%variable value%%$$END_LINE_OP
+@CPP@||LANG||@JAVA@
 %%access type%% %%variable type%% %%variable name%% = %%variable value%%$$END_LINE_OP
+@JAVA@||LANG||@PYTHON@
+%%variable name%% = %%variable value%%$$END_LINE_OP
+self.%%variable name%% = %%variable value%%$$END_LINE_OP
+@PYTHON@
+
 %%STATEMENT_END%%
+
+%%COMPONENT_TYPE_START%%DECLARE_FIELD%%COMPONENT_TYPE_END%%
+
+%%ALLOWED_CHILDREN_START%%__NONE__%%ALLOWED_CHILDREN_END%%

@@ -19,17 +19,12 @@ import java.util.logging.Logger;
 public class GlobalGrammerParser{
 
     private static GlobalGrammerParser instance = new GlobalGrammerParser();
-    private JavaCodeGenerator jGrammar = new JavaCodeGenerator();
+    private TemplateCodeGenerator jGrammar = TemplateCodeGenerator.getInstance();
     
-    public boolean isClassType(CodeGenerator c) {
-        try {
-            CodeBlock blk = (CodeBlock) c;
-            return (blk.getHead() instanceof ClassCodeBlockHead);
-        } catch (ClassCastException e) {
-            return false;
-        }
+    public boolean isClassType(SimplePropertyStatement c) {
+        return c.getType().equals("CLASS_TYPE");
     }
-    private List<Statement> code = new ArrayList<>();
+    private List<SimplePropertyStatement> code = new ArrayList<>();
 
     public static GlobalGrammerParser getInstance() {
         return instance;
@@ -42,7 +37,7 @@ public class GlobalGrammerParser{
                 try {
                     String res = "";
                     res = c.toText();
-                    String v = ((ClassCodeBlockHead) ((CodeBlock) c).getHead()).getClassName();
+                    String v = c.getName();
 //                jGrammar.createFile();
                     jGrammar.generateClass(path, v, res);
                 } catch (ErrorGenerateCodeException ex) {
@@ -54,11 +49,11 @@ public class GlobalGrammerParser{
     }
 
 //        return res;
-    public List<Statement> getCode() {
+    public List<SimplePropertyStatement> getCode() {
         return code;
     }
 
-    public void setCode(List<Statement> code) {
+    public void setCode(List<SimplePropertyStatement> code) {
         this.code = code;
     }
 

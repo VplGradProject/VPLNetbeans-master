@@ -175,6 +175,20 @@ public class ComponentsModel {
         return lst;
 
     }
+    
+    public List<Component> getComponentTree(Component root) {
+        Queue<Component> compq = new LinkedList<>();
+        List<Component> lst = new ArrayList<>();
+        Component comp = root;
+        compq.add(comp);
+        while (!compq.isEmpty()) {
+            Component c = compq.poll();
+            lst.add(c);
+            compq.addAll(c.childernProperty());
+        }
+        return lst;
+
+    }
 
     public boolean removeComponetByUuid(String uuid) throws ComponentNotFoundException {
         //TODO DONE add remove by finding
@@ -218,12 +232,14 @@ public class ComponentsModel {
 
     public ClassComponent getClassByName(String name) throws ComponentNotFoundException {
         ObservableList<ProjectComponent> lst = toList();
+        ClassComponent result = null;
         for (ProjectComponent c : lst) {
-            //FIXME fix return of class name
-            return c.getClassByName(name);
+            result = c.getClassByName(name);
         }
-
-        throw new ComponentNotFoundException("Class Not Found");
+        if (result == null) {
+            throw new ComponentNotFoundException("Class Not Found");
+        }
+        return result;
     }
 
     public String addMethodByUuid(String uuid, MethodComponent c) throws IllegalComponent, ComponentNotFoundException {

@@ -5,5 +5,13 @@
 %%variable value%%:0
 %%PROPERTIES_END%%
 %%STATEMENT_START%%
+@JAVA, CPP@
 %%variable type%% %%variable name%% = %%variable value%%$$END_LINE_OP
+@JAVA, CPP@||LANG||@PYTHON@
+%%variable name%% = %%variable value%%$$END_LINE_OP
+@PYTHON@
 %%STATEMENT_END%%
+
+%%COMPONENT_TYPE_START%%DECLARE_VAR%%COMPONENT_TYPE_END%%
+
+%%ALLOWED_CHILDREN_START%%__NONE__%%ALLOWED_CHILDREN_END%%

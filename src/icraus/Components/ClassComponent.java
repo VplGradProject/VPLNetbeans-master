@@ -28,16 +28,17 @@ public class ClassComponent extends Component {
     private StringProperty packageName;
     private ObservableList<MethodComponent> methodsList;
     private ObservableList<SimpleComponent> fieldsList;
-    private List<Statement> childStaments;
-    private SimplePropertyStatement statementRef;
+    protected List<Statement> childStaments;
+    protected SimplePropertyStatement statementRef;
 
     public ClassComponent() {
         super();
-        
+
         className = new SimpleStringProperty("");
         packageName = new SimpleStringProperty("");
         methodsList = new ObservableListWrapper<>(new ArrayList<>());
         fieldsList = new ObservableListWrapper<>(new ArrayList<>());
+        setUiProperties(UiProperties.createUiProperties(202, 327, "classStyle.css", ""));
 
         try {
             statementRef = SimplePropertyStatement.fromFile("CLASS_TEMPLATE.template");
@@ -49,6 +50,7 @@ public class ClassComponent extends Component {
         }
         setUiDelegate(new ClassContentPane(this));
         createListners();
+
     }
 
     public ClassComponent(String className, String packageName) {
@@ -64,16 +66,16 @@ public class ClassComponent extends Component {
     }
 
     protected void createListners() {
-        propertyMapProperty().addListener((Observable e) ->{
+        propertyMapProperty().addListener((Observable e) -> {
             statementRef.setPropertyMap(getPropertyMap());
             className.setValue(propertyMapProperty().get("%%class name%%"));
             packageName.setValue(propertyMapProperty().get("%%packageName%%"));
         });
-        className.addListener(e ->{
-            statementRef.getPropertyMap().put("%%class name%%",className.get());
+        className.addListener(e -> {
+            statementRef.getPropertyMap().put("%%class name%%", className.get());
         });
-        packageName.addListener(e ->{
-            statementRef.getPropertyMap().put("%%packageName%%",packageName.get());
+        packageName.addListener(e -> {
+            statementRef.getPropertyMap().put("%%packageName%%", packageName.get());
         });
         methodsList.addListener((Observable e) -> {
             componentChanged();
@@ -82,7 +84,6 @@ public class ClassComponent extends Component {
         fieldsList.addListener((Observable e) -> {
             componentChanged();
         });
-        
 
     }
 
@@ -92,7 +93,6 @@ public class ClassComponent extends Component {
         childernProperty().addAll(fieldsList);
         childernProperty().addAll(methodsList);
     }
-
 
     public String getClassName() {
         return className.get();
@@ -118,8 +118,6 @@ public class ClassComponent extends Component {
         packageName.setValue(s);
     }
 
-    
-
     @XmlTransient
     public ObservableList<MethodComponent> getMethodsList() {
         return methodsList;
@@ -142,21 +140,16 @@ public class ClassComponent extends Component {
 
     @Override
     public String addComponent(Component c) throws IllegalComponent {
-        if (c.getType() == MethodComponent.METHOD_TYPE) {
-            super.addComponent(c);
-            getMethodsList().add((MethodComponent) c); //TODO add children method Listener
-            return c.getUUID();
-        }
-
         super.addComponent(c);
-        getFieldsList().add((SimpleComponent) c); //TODO add children method Listener
+        if (c.getType().equals("METHOD")) {
+            getMethodsList().add((MethodComponent) c); //TODO add children method Listener
+        } else if (c.getType().equals("DECLARE_FIELD")) {
+            getFieldsList().add((SimpleComponent) c); //TODO add children method Listener
+        }
         return c.getUUID();
 
-//        throw new IllegalComponent();
         //TODO add field Component
     }
-
-    
 
     private void componentChanged() {
         childStaments.clear();

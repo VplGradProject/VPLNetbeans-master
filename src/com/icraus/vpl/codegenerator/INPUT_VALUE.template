@@ -3,5 +3,18 @@
 %%variable name%%: i
 %%PROPERTIES_END%%
 %%STATEMENT_START%%
+@CPP@
+std::string %%variable name%%$$END_LINE_OP
+std::cin >> %%variable name%%$$END_LINE_OP
+@CPP@||LANG||@JAVA@
 String %%variable name%% = new Scanner(System.in).next()$$END_LINE_OP
+@JAVA@||LANG||
+@PYTHON@
+testVar = raw_input("Ask user for something.")
+@PYTHON@
+
 %%STATEMENT_END%%
+
+%%COMPONENT_TYPE_START%%INPUT_VALUE%%COMPONENT_TYPE_END%%
+
+%%ALLOWED_CHILDREN_START%%__NONE__%%ALLOWED_CHILDREN_END%%

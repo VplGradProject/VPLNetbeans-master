@@ -1,0 +1,42 @@
+%%NAME_START%% MAIN Class %%NAME_END%%
+%%PROPERTIES_START%%
+%%class name%%: ClassName
+%%class type%%:class:__CHOICE__%%__NULL__%%[class%{$$CLASS_STAT}%, interface%{interface}%]
+%%access type%%:public:__CHOICE__%%__NULL__%%[public, private, protected]
+%%extends%%:Object:__VAR__TYPE__%%CLASS_TYPE%%[%%class name%%]:D%<{$$EXTENDS_WRD}<%
+%%imports%%:Main:__VAR__TYPE__%%CLASS_TYPE%%[%%packageName%%]:__ANY__
+%%interfaces%%[]:Serializable:__ANY__:D%<{$$IMPLEMENTS_WRD}<%
+%%packageName%%:Main
+%%PROPERTIES_END%%
+%%STATEMENT_START%%
+@CPP@
+#pargma once
+
+$$IMPORT_STAT <iostream>
+$$IMPORT_STAT <string>
+$$IMPORT_STAT <vector>
+$$IMPORT_STAT <algorithm>
+$$IMPORT_STAT "%%imports%%.cpp"
+
+using namespace std$$END_LINE_OP
+
+void main(int argc, char *argv[]) $$BLOCK_START_OP
+%%CHILDREN_TOKEN%%
+$$BLOCK_END_OP
+@CPP@||LANG||@JAVA@
+$$PACKAGE_WRD %%packageName%%$$END_LINE_OP
+$$IMPORT_STAT java.util.Scanner$$END_LINE_OP 
+$$IMPORT_STAT java.util.*$$END_LINE_OP 
+$$IMPORT_STAT %%imports%%$$END_LINE_OP 
+public class MAIN $$BLOCK_START_OP
+public static void main(String[] args)$$BLOCK_START_OP
+%%CHILDREN_TOKEN%%
+$$BLOCK_END_OP
+$$BLOCK_END_OP
+@JAVA@||LANG||@PYTHON@
+$$IMPORT_STAT %%imports%%$$END_LINE_OP 
+%%CHILDREN_TOKEN%%
+@PYTHON@
+%%STATEMENT_END%%
+
+%%COMPONENT_TYPE_START%%CLASS_TYPE%%COMPONENT_TYPE_END%%

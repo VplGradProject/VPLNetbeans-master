@@ -85,6 +85,7 @@ public class ComponentListUi extends VBox implements MapChangeListener<Object, O
             try {
                 String uid = instance.addComponent(instance.getCurrentComponent(), c.createComponent());
             } catch (IllegalComponentInstantiation | ComponentNotFoundException | IllegalComponent ex) {
+            //REMOVETHIS
                 ex.printStackTrace();
                 new Alert(Alert.AlertType.ERROR, "Error Adding Component", ButtonType.OK).showAndWait();
             }

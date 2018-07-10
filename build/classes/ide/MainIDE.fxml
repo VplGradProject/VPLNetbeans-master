@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -46,6 +47,7 @@
                   <Button mnemonicParsing="false" onAction="#removeComponent" styleClass="removeButton" text="     remove" textFill="WHITE" />
                   <Button mnemonicParsing="false" onAction="#moveUp" styleClass="upButton" text="   Up" textFill="WHITE" />
                   <Button mnemonicParsing="false" onAction="#moveDown" styleClass="downButton" text="   Down" textFill="WHITE" />
+                  <ComboBox fx:id="languageComboBox" prefWidth="150.0" promptText="language" />
                   <Button mnemonicParsing="false" onAction="#load" text="load" textFill="WHITE" />
                   <Button mnemonicParsing="false" onAction="#saveAs" styleClass="saveButton" text="      Save Project" textFill="WHITE" />
                   <Button fx:id="generateCodeButton" mnemonicParsing="false" onAction="#generateCode" styleClass="runButton" text="    Run" textFill="WHITE" />

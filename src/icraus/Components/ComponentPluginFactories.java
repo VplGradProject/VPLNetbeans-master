@@ -28,6 +28,18 @@ public class ComponentPluginFactories extends SimpleComponentPlugin {
                 });
     }
 
+    public static ComponentPlugin createMainComponentPlugin(String componentName, String sectionName) {
+
+        return new SimpleComponentPlugin(componentName,
+                sectionName,
+                null,
+                () -> {
+                    return createMainStatement();
+                },
+                (c) -> {
+                });
+    }
+
     public static Component createSimpleComponent(String template, double width, double height, String css, String cssId) {
         SimplePropertyStatement s = null;
         try {
@@ -62,8 +74,12 @@ public class ComponentPluginFactories extends SimpleComponentPlugin {
         return createSimpleTabbedComponent("IF_TEMPLATE.template", 80.0, 80.0, "ifStyle.css", "ifStatement");
     }
 
+    public static Component createMainStatement() {
+        return createSimpleTabbedComponent("MAINCLASS_TEMPLATE.template", 80.0, 80.0, "ifStyle.css", "ifStatement");
+    }
+
     public static Component createForComponent() {
-             
+
         return createSimpleTabbedComponent("FOR_TEMPLATE.template", 120, 40, "forStyle.css", "forLoop");
     }
 
@@ -79,8 +95,8 @@ public class ComponentPluginFactories extends SimpleComponentPlugin {
     }
 
     public static Component createInputValueComponent() {
-       return createSimpleComponent("INPUT_VALUE.template", 120, 40, "inputStyle.css", "inputValue"); 
-       
+        return createSimpleComponent("INPUT_VALUE.template", 120, 40, "inputStyle.css", "inputValue");
+
     }
 
     public static ComponentPlugin createInputValue(String name, String section) {
@@ -91,7 +107,7 @@ public class ComponentPluginFactories extends SimpleComponentPlugin {
 
     public static Component createCommentComponent() {
         return createSimpleComponent("COMMENT.template", 120, 40, "commentStyle.css", "comment");
-        
+
     }
 
     public static ComponentPlugin createComment(String name, String section) {
@@ -102,7 +118,7 @@ public class ComponentPluginFactories extends SimpleComponentPlugin {
 
     public static Component createCallMethodComponent() {
         return createSimpleComponent("CALL_METHOD.template", 120, 40, "callStyle.css", "callMethod");
-       
+
     }
 
     public static ComponentPlugin createCallMethod(String name, String section) {
@@ -112,7 +128,7 @@ public class ComponentPluginFactories extends SimpleComponentPlugin {
     }
 
     public static Component createOutputComponent() {
-      return createSimpleComponent("OUTPUT.template", 120, 40, "outputStyle.css", "outputExpression");
+        return createSimpleComponent("OUTPUT.template", 120, 40, "outputStyle.css", "outputExpression");
     }
 
     public static ComponentPlugin createOutput(String name, String section) {
@@ -123,7 +139,7 @@ public class ComponentPluginFactories extends SimpleComponentPlugin {
 
     public static Component createWhileComponent() {
         return createSimpleTabbedComponent("WHILE_TEMPLATE.template", 120, 40, "whileStyle.css", "whileLoop");
-        
+
     }
 
     public static ComponentPlugin createWhileComponentPlugin(String componentName, String sectionName) {
@@ -137,12 +153,12 @@ public class ComponentPluginFactories extends SimpleComponentPlugin {
                 (c) -> {
                 });
     }
-    
-    
+
     public static Component createDeclareComponent() {
         return createSimpleComponent("DECLARE_VAR.template", 120, 40, "declareStyle.css", "declareVariable");
-        
+
     }
+
     public static ComponentPlugin createDeclareVarPlugin(String componentName, String sectionName) {
 
         return new SimpleComponentPlugin(componentName,
@@ -154,10 +170,12 @@ public class ComponentPluginFactories extends SimpleComponentPlugin {
                 (c) -> {
                 });
     }
+
     public static Component createAssignComponent() {
         return createSimpleComponent("ASSIGN_VALUE.template", 120, 40, "", "");
-        
+
     }
+
     public static ComponentPlugin createAssignVarPlugin(String componentName, String sectionName) {
 
         return new SimpleComponentPlugin(componentName,

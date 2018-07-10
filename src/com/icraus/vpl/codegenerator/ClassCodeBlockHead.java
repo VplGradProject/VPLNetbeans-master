@@ -7,7 +7,6 @@ package com.icraus.vpl.codegenerator;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 
 //TODO Add DECORATOR For access Modifiers, storage qualifier

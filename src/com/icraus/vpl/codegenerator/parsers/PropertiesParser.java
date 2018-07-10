@@ -31,6 +31,9 @@ public class PropertiesParser {
     }
 
     public static String formatLookAHeadOutput(String name, String pattern) {
+        if (name.trim().isEmpty()) {
+            return "";
+        }
         Pattern namePattern = Pattern.compile("(D+)" + "%([<>=]*)\\{" + SimplePropertyStatement.ANY_PATTERN + "\\}\\2+%");
         Matcher m = namePattern.matcher(pattern);
         String value = name;
@@ -55,24 +58,25 @@ public class PropertiesParser {
         Matcher m = null;
         Pattern p = Pattern.compile("__VAR__TYPE__%%" + SimplePropertyStatement.ANY_PATTERN + "%%\\[" + SimplePropertyStatement.ANY_PATTERN + "\\]");
         m = p.matcher(type);
-        m.find();
-        String[] componentType = m.group(1).split(",");
-        String[] variable = m.group(2).split(",");
-        List<Component> lst = new ArrayList<>();
-        for (String v : componentType) {
-            lst.addAll(ComponentsModel.getInstance().getComponentsByType(v));
-        }
         List<String> stringLst = new ArrayList<>();
-        for (Component c : lst) {
-            for (String v : variable) {
-                stringLst.add(c.getPropertyMap().get(v));
+        if (m.find()) {
+            String[] componentType = m.group(1).split(",");
+            String[] variable = m.group(2).split(",");
+            List<Component> lst = new ArrayList<>();
+            for (String v : componentType) {
+                lst.addAll(ComponentsModel.getInstance().getComponentsByType(v));
+            }
+            for (Component c : lst) {
+                for (String v : variable) {
+                    stringLst.add(c.getPropertyMap().get(v));
+                }
             }
         }
         return stringLst;
 
     }
 
-    public static List<Formatter> parseChoiceOutputs(String type) {
+    public static List<Formatter> parseChoiceOutputs(String type, String name) {
         Pattern p = Pattern.compile(SimplePropertyStatement.__CHOICE__VAR + "%%" + SimplePropertyStatement.ANY_PATTERN + "%%\\[" + SimplePropertyStatement.ANY_PATTERN + "\\]");
         Matcher m = null;
         m = p.matcher(type);
@@ -92,6 +96,7 @@ public class PropertiesParser {
             }
             lst.add(f);
         }
+
         return lst;
     }
 

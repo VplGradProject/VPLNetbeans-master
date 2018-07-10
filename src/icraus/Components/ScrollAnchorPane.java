@@ -6,11 +6,20 @@
 package icraus.Components;
 
 import icraus.Components.event.CanvasDragEventHandler;
+import ide.ComponentClipBoard;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.AnchorPane;
@@ -34,6 +43,7 @@ public class ScrollAnchorPane extends ScrollPane implements Selectable {
             drawChildren();
         });
         setId("GUI" + parentComponent.getUUID());
+
     }
 
     public ScrollAnchorPane(Component _parent) {
@@ -46,6 +56,17 @@ public class ScrollAnchorPane extends ScrollPane implements Selectable {
         }
         setContent(new ContentPane());
         getContent().addEventHandler(DragEvent.ANY, new CanvasDragEventHandler());
+        MenuItem itm = new MenuItem("paste");
+        ContextMenu m = new ContextMenu(itm);
+        itm.setOnAction(e -> {
+            try {
+                ComponentClipBoard.getInstance().paste(getParentComponent());
+            } catch (ComponentNotFoundException | CloneNotSupportedException | IllegalComponent ex) {
+                Logger.getLogger(ScrollAnchorPane.class.getName()).log(Level.SEVERE, null, ex);
+                new Alert(Alert.AlertType.ERROR, "Cannot paste here", ButtonType.OK).showAndWait();
+            }
+        });
+        setContextMenu(m);
     }
 
     public ScrollAnchorPane() {
@@ -61,6 +82,7 @@ public class ScrollAnchorPane extends ScrollPane implements Selectable {
 
         ObservableList<Component> lst = parentComponent.childernProperty();
         ContentPane pane = (ContentPane) getContent();
+        List<Node> oldNodeLst = new LinkedList<>(pane.getChildren());
         pane.getChildren().clear();
         double y = 50;
         double x = 200;
@@ -68,13 +90,19 @@ public class ScrollAnchorPane extends ScrollPane implements Selectable {
         for (Component c : lst) {
             Node n = c.getUiDelegate();
             nodeLst.add(n);
-            pane.getChildren().add(n);
-            n.setLayoutX(x);
-            n.setLayoutY(y);
+            if (!pane.getChildren().contains(n)) {
+                pane.getChildren().add(n);
+            }
+            if (!oldNodeLst.contains(n)) {
+                n.setLayoutX(x);
+                n.setLayoutY(y);
+
+            }
             y += n.getBoundsInParent().getHeight() + 50;
         }
-        if(nodeLst.isEmpty())
+        if (nodeLst.isEmpty()) {
             return;
+        }
         Node prev = nodeLst.get(0);
         for (int i = 1; i < nodeLst.size(); ++i) {
             Node next = nodeLst.get(i);

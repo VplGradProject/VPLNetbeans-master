@@ -3,6 +3,17 @@
 %%value%%:i:__ANY__:__ANY__
 %%PROPERTIES_END%%
 %%STATEMENT_START%%
+@CPP@
+std::cout << %%value%% << std::endl$$END_LINE_OP
+@CPP@||LANG||
+@JAVA@
 System.out.println(%%value%%)$$END_LINE_OP
+@JAVA@||LANG||@PYTHON@
+print(%%value%%)$$END_LINE_OP
+@PYTHON@
+
 $$BLOCK_END_OP
 %%STATEMENT_END%%
+
+%%COMPONENT_TYPE_START%%OUTPUT%%COMPONENT_TYPE_END%%
+%%ALLOWED_CHILDREN_START%%__NONE__%%ALLOWED_CHILDREN_END%%

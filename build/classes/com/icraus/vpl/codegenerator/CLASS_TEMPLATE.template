@@ -6,12 +6,40 @@
 %%extends%%:Object:__VAR__TYPE__%%CLASS_TYPE%%[%%class name%%]:D%<{$$EXTENDS_WRD}<%
 %%imports%%:java.io.Serializable
 %%interfaces%%[]:Serializable:__ANY__:D%<{$$IMPLEMENTS_WRD}<%
-%%packageName%%:main
+%%packageName%%:Main
 %%PROPERTIES_END%%
 %%STATEMENT_START%%
+@CPP@
+#pargma once
+
+$$IMPORT_STAT <iostream>
+$$IMPORT_STAT <string>
+$$IMPORT_STAT <vector>
+$$IMPORT_STAT <algorithm>
+$$IMPORT_STAT <%%imports%%>
+
+using namespace std$$END_LINE_OP
+
+$$PACKAGE_WRD %%packageName%%$$BLOCK_START_OP
+$$CLASS_STAT %%class name%% %%extends%% %%interfaces%%[] $$BLOCK_START_OP
+%%CHILDREN_TOKEN%%
+$$BLOCK_END_OP$$END_LINE_OP 
+$$BLOCK_END_OP
+@CPP@||LANG||@JAVA@
 $$PACKAGE_WRD %%packageName%%$$END_LINE_OP
+$$IMPORT_STAT java.util.Scanner$$END_LINE_OP 
+$$IMPORT_STAT java.util.*$$END_LINE_OP 
 $$IMPORT_STAT %%imports%%$$END_LINE_OP 
 %%access type%% %%class type%% %%class name%% %%extends%% %%interfaces%%[] $$BLOCK_START_OP
 %%CHILDREN_TOKEN%%
 $$BLOCK_END_OP
+@JAVA@||LANG||@PYTHON@
+$$IMPORT_STAT %%imports%%$$END_LINE_OP 
+%%class type%% %%class name%% (%%extends%%, %%interfaces%%[]) $$BLOCK_START_OP
+%%CHILDREN_TOKEN%%
+$$BLOCK_END_OP
+@PYTHON@
 %%STATEMENT_END%%
+
+%%COMPONENT_TYPE_START%%CLASS_TYPE%%COMPONENT_TYPE_END%%
+%%ALLOWED_CHILDREN_START%%DECLARE_FIELD, METHOD%%ALLOWED_CHILDREN_END%%

@@ -56,7 +56,7 @@ public class PropertyDialog extends VBox {
         }
         this.component = comp;
         wdgt = new PropertyWidget(comp);
-        nameLabel.setText(comp.getType());
+        nameLabel.setText(comp.getStatement().getName());
         contentHBox.getChildren().add(wdgt);
     }
 
