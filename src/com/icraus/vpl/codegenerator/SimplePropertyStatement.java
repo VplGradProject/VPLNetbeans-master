@@ -51,6 +51,7 @@ public class SimplePropertyStatement extends Statement {
     public static String __OTHERS__VAR = "__OTHERS__VAR__";
     private static String generationLanguage = "JAVA";
     private static int i = 0;
+
     public static String getGenerationLanguage() {
         return generationLanguage;
     }
@@ -58,6 +59,7 @@ public class SimplePropertyStatement extends Statement {
     public static void setGenerationLanguage(String aGenerationLanguage) {
         generationLanguage = aGenerationLanguage;
     }
+
     public String getType() {
         return type;
     }
@@ -120,6 +122,7 @@ public class SimplePropertyStatement extends Statement {
     }
     private List<Statement> children = new ArrayList<>();
     public static String CHILDREN_TOKEN = "%%CHILDREN_TOKEN%%";
+    public static String CHILDREN_TOKEN_JOINED = "%%CHILDREN_TOKEN" + "(\\[" + ANY_PATTERN + "\\])*" + "%%";
 
     public SimplePropertyStatement() {
     }
@@ -190,7 +193,6 @@ public class SimplePropertyStatement extends Statement {
             Logger.getLogger(SimplePropertyStatement.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
     }
 
     private String getStatementTemplate(String lang) throws ErrorGenerateCodeException {
@@ -212,12 +214,14 @@ public class SimplePropertyStatement extends Statement {
         return template;
 
     }
-    private String dublicate(String s, int i){
-        for(int n = 0; n < i;++n){
+
+    private String dublicate(String s, int i) {
+        for (int n = 0; n < i; ++n) {
             s += s;
         }
         return s;
     }
+
     @Override
     public String toText() throws ErrorGenerateCodeException {
         getStatementTemplate(getGenerationLanguage());
@@ -225,21 +229,45 @@ public class SimplePropertyStatement extends Statement {
         for (String s : propertyMap.keySet()) {
             result = result.replace(s, propertyMap.get(s));
         }
-        ++i;
+
+        Pattern p = Pattern.compile(CHILDREN_TOKEN_JOINED);
+        Matcher m = p.matcher(result);
         String childs = "";
-        if(getChildren().isEmpty()){
-            childs = dublicate(" ", i) + GrammerConstants.PASS_WRD;
-        }
-        for (Statement s : getChildren()) {
-            String[] stringArr = s.toText().split("\n");
-            for(String d : stringArr){
-                childs += dublicate(" ", i) + d + "\n"; 
+        List<String> childLst = new ArrayList<>();
+        if (m.find()) {
+            ++i;
+            String expectedReplace = m.group(0).trim();
+            String token = m.group(2);
+            token = (token == null) ? "" : token;
+            if (getChildren().isEmpty()) {
+                childLst.add(dublicate(" ", i) + GrammerConstants.PASS_WRD);
             }
+            for (Statement s : getChildren()) {
+                String[] stringArr = s.toText().split("\n");
+                for (String d : stringArr) {
+                    childLst.add(dublicate(" ", i) + d + "\n");
+                }
+            }
+
+            --i;
+            childs = String.join(token, childLst);
+            result = result.replace(expectedReplace, childs);
         }
-        --i;
-//        childs = childs.substring(1);
-//        childs = childsss.substring(1, childs.length() - 1);
-        result = result.replace(CHILDREN_TOKEN, childs);
+//        String token = "";
+
+//        if (getChildren().isEmpty()) {
+//            childLst.add(dublicate(" ", i) + GrammerConstants.PASS_WRD);
+//        }
+//        for (Statement s : getChildren()) {
+//            String[] stringArr = s.toText().split("\n");
+//            for (String d : stringArr) {
+//                childLst.add(dublicate(" ", i) + d + "\n");
+//            }
+//        }
+//
+//        --i;
+//        childs = String.join(token, childLst);
+//        result = result.replace(CHILDREN_TOKEN, childs);
         return result;
     }
 

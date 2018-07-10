@@ -4,7 +4,7 @@
 %%class type%%:class:__CHOICE__%%__NULL__%%[class%{$$CLASS_STAT}%, interface%{interface}%]
 %%access type%%:public:__CHOICE__%%__NULL__%%[public, private, protected]
 %%extends%%:Object:__VAR__TYPE__%%CLASS_TYPE%%[%%class name%%]:D%<{$$EXTENDS_WRD}<%
-%%imports%%:java.io.Serializable
+%%imports%%:Main:__VAR__TYPE__%%CLASS_TYPE%%[%%packageName%%]:__ANY__
 %%interfaces%%[]:Serializable:__ANY__:D%<{$$IMPLEMENTS_WRD}<%
 %%packageName%%:Main
 %%PROPERTIES_END%%

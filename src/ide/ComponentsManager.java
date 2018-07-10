@@ -71,7 +71,7 @@ public class ComponentsManager {
             // I/O error encounted during the iteration, the cause is an IOException
 //            throw ex.getCause();
         } catch (IOException ex) {
-            Logger.getLogger(ComponentsManager.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ComponentsManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -101,6 +101,12 @@ public class ComponentsManager {
         addComponent(ComponentPluginFactories.createWhileComponentPlugin("While", "inner blocks"));
         addComponent(ComponentPluginFactories.createDeclareVarPlugin("Declare Var", "Others"));
         addComponent(ComponentPluginFactories.createAssignVarPlugin("Assign Value", "Others"));
+        addComponent(ComponentPluginFactories.createDBColPlugin("Column", "DB"));
+        addComponent(ComponentPluginFactories.createDBCreatePlugin("creat", "DB"));
+        addComponent(ComponentPluginFactories.createDBDeletePlugin("Delete", "DB"));
+        addComponent(ComponentPluginFactories.createDBInsertPlugin("insert", "DB"));
+        addComponent(ComponentPluginFactories.createDBSelectPlugin("Select", "DB"));
+        addComponent(ComponentPluginFactories.createDBUpdatePlugin("update", "DB"));
         plugin = new SimpleComponentPlugin("MainClass", "Containers", new MainClassComponent(), null);
         addComponent(plugin);
     }

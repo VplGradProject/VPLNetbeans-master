@@ -40,6 +40,21 @@ public class ComponentPluginFactories extends SimpleComponentPlugin {
                 });
     }
 
+    public static Component createSimpleComponent(SimplePropertyStatement.FILE_TYPE type, String template, double width, double height, String css, String cssId) {
+        SimplePropertyStatement s = null;
+        try {
+            s = SimplePropertyStatement.fromFile(type, template);
+        } catch (IllegalStatementException ex) {
+            Logger.getLogger(ComponentPluginFactories.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        SimpleComponent comp = new SimpleComponent(s, null, s.getName());
+        UiProperties props = UiProperties.createUiProperties(width, height, css, cssId);
+        comp.setUiProperties(props);
+        Item node = new Item(comp);
+        comp.setUiDelegate(node);
+        return comp;
+    }
+    
     public static Component createSimpleComponent(String template, double width, double height, String css, String cssId) {
         SimplePropertyStatement s = null;
         try {
@@ -59,6 +74,21 @@ public class ComponentPluginFactories extends SimpleComponentPlugin {
         SimplePropertyStatement s = null;
         try {
             s = SimplePropertyStatement.fromFile(template);
+        } catch (IllegalStatementException ex) {
+            Logger.getLogger(ComponentPluginFactories.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        SimpleComponent comp = new SimpleComponentTabbed(s, null, s.getName());
+        UiProperties props = UiProperties.createUiProperties(width, height, css, cssId);
+        comp.setUiProperties(props);
+        Item node = new Item(comp);
+        comp.setUiDelegate(node);
+        return comp;
+    }
+
+    public static Component createSimpleTabbedComponent(SimplePropertyStatement.FILE_TYPE type, String template, double width, double height, String css, String cssId) {
+        SimplePropertyStatement s = null;
+        try {
+            s = SimplePropertyStatement.fromFile(type, template);
         } catch (IllegalStatementException ex) {
             Logger.getLogger(ComponentPluginFactories.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -183,6 +213,98 @@ public class ComponentPluginFactories extends SimpleComponentPlugin {
                 null,
                 () -> {
                     return createAssignComponent();
+                },
+                (c) -> {
+                });
+    }
+    
+    public static Component createDATABASECOLUMNComponent() {
+        return createSimpleComponent(SimplePropertyStatement.FILE_TYPE.FILE, "F:\\Important\\Code\\Graduation_Project\\VPLNetbeans-master\\plugins\\COLUMN_TEMP.template", 120, 40, "", "");
+
+    }
+    public static Component createDBCREATETABLEComponent() {
+        return createSimpleTabbedComponent(SimplePropertyStatement.FILE_TYPE.FILE, "F:\\Important\\Code\\Graduation_Project\\VPLNetbeans-master\\plugins\\" + "CREATETABLE_TEMPLATE" + ".template", 120, 40, "", "");
+
+    }
+    public static Component createDBDELETEComponent() {
+        return createSimpleComponent(SimplePropertyStatement.FILE_TYPE.FILE, "F:\\Important\\Code\\Graduation_Project\\VPLNetbeans-master\\plugins\\"+"DELETE_TEMPLATE" + ".template", 120, 40, "", "");
+
+    }
+    public static Component createDBINSERTComponent() {
+        return createSimpleComponent(SimplePropertyStatement.FILE_TYPE.FILE, "F:\\Important\\Code\\Graduation_Project\\VPLNetbeans-master\\plugins\\"+"INSERTDB_TEMPLATE" + ".template", 120, 40, "", "");
+
+    }
+    public static Component createDBSelectComponent() {
+        return createSimpleComponent(SimplePropertyStatement.FILE_TYPE.FILE, "F:\\Important\\Code\\Graduation_Project\\VPLNetbeans-master\\plugins\\"+"SELECT_TEMPLATE" + ".template", 120, 40, "", "");
+
+    }
+    public static Component createDBUPDATEDB_TEMPLATEComponent() {
+        return createSimpleComponent(SimplePropertyStatement.FILE_TYPE.FILE, "F:\\Important\\Code\\Graduation_Project\\VPLNetbeans-master\\plugins\\"+"UPDATEDB_TEMPLATE" + ".template", 120, 40, "", "");
+
+    }
+    
+    public static ComponentPlugin createDBColPlugin(String componentName, String sectionName) {
+
+        return new SimpleComponentPlugin(componentName,
+                sectionName,
+                null,
+                () -> {
+                    return createDATABASECOLUMNComponent();
+                },
+                (c) -> {
+                });
+    }
+    public static ComponentPlugin createDBSelectPlugin(String componentName, String sectionName) {
+
+        return new SimpleComponentPlugin(componentName,
+                sectionName,
+                null,
+                () -> {
+                    return createDBSelectComponent();
+                },
+                (c) -> {
+                });
+    }
+    public static ComponentPlugin createDBDeletePlugin(String componentName, String sectionName) {
+
+        return new SimpleComponentPlugin(componentName,
+                sectionName,
+                null,
+                () -> {
+                    return createDBDELETEComponent();
+                },
+                (c) -> {
+                });
+    }
+    public static ComponentPlugin createDBCreatePlugin(String componentName, String sectionName) {
+
+        return new SimpleComponentPlugin(componentName,
+                sectionName,
+                null,
+                () -> {
+                    return createDBCREATETABLEComponent();
+                },
+                (c) -> {
+                });
+    }
+    public static ComponentPlugin createDBInsertPlugin(String componentName, String sectionName) {
+
+        return new SimpleComponentPlugin(componentName,
+                sectionName,
+                null,
+                () -> {
+                    return createDBINSERTComponent();
+                },
+                (c) -> {
+                });
+    }
+    public static ComponentPlugin createDBUpdatePlugin(String componentName, String sectionName) {
+
+        return new SimpleComponentPlugin(componentName,
+                sectionName,
+                null,
+                () -> {
+                    return createDBUPDATEDB_TEMPLATEComponent();
                 },
                 (c) -> {
                 });

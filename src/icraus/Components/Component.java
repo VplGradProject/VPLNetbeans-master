@@ -217,27 +217,6 @@ public abstract class Component implements Cloneable {
         this.parent.setValue(_parent);
     }
 
-////    @Override
-//    public void writeExternal(ObjectOutput out) throws IOException {
-//        out.writeObject(getUUID());
-//        out.writeObject(getType());
-//        out.writeInt(getFlags());
-//        out.writeObject(getParent());
-//        out.writeObject(new ArrayList<Component>(childernProperty()));
-//        out.writeObject(getStatement());
-//
-//    }
-//
-////    @Override
-//    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-//        setUUID((String) in.readObject());
-//        setType((String) in.readObject());
-//        setFlags(in.readInt());
-//        setParent((Component) in.readObject());
-//        childernProperty().addAll((ArrayList<Component>) in.readObject());
-//        setStatement((SimplePropertyStatement) in.readObject());
-//
-//    }
     public void moveUp() {
         moveHelper(-1);
     }
